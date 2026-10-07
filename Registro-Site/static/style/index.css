@@ -1,0 +1,86 @@
+body {
+    background-color: #03045e; 
+    color: #e2eafc;            
+    margin: 0;
+    padding: 20px;
+}
+.menu {
+    display: flex;
+    justify-content: space-between; 
+    background-color: #023e8a;
+    border: 1px solid #0077b6;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+.menu .links a {
+    color: #90e0ef;
+    text-decoration: none; 
+    margin-left: 15px;     
+}
+h1 {
+    color: #ffffff;
+}
+.lista {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;              
+}
+.card {
+    display: flex;          
+    align-items: center;    
+    background-color: #023e8a;
+    border: 1px solid #0077b6;
+    border-radius: 4px;              
+    padding: 15px;
+    width: 100%;
+    max-width: 600px;       
+}
+.card .foto {
+    width: 50px;
+    height: 50px;
+    background-color: #03045e;
+    border: 1px solid #0077b6;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin-right: 15px;     
+}
+.card .texto h3 {
+    margin: 0 0 5px 0;      
+    color: #ffffff;
+}
+.card .texto p {
+    margin: 0;
+    color: #caf0f8;
+}
+
+/* cards clicáveis */
+.card a{
+    color: inherit;
+    text-decoration: none;
+}
+.card .foto{
+    color: #ffffff;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+.card .texto h3 a:hover{
+    color: #90e0ef;
+    text-decoration: underline;
+}
+.card:hover{
+    border-color: #90e0ef;
+}
+
+/* foto do jogador dentro do quadrado do card */
+.card .foto {
+    overflow: hidden;
+}
+.card .foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

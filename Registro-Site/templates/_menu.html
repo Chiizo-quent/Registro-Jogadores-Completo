@@ -1,0 +1,18 @@
+<div class="menu">
+    <span>Registro</span>
+    <div class="links">
+        {% if usuario %}
+            {% if tem_perfil %}
+                <a href="{{ url_for('perfil', usuario=usuario) }}">Meu Perfil</a>
+                <a href="/meu-perfil">Editar Perfil</a>
+            {% else %}
+                <a href="/meu-perfil">Criar Perfil</a>
+            {% endif %}
+            <a href="/sair">Sair</a>
+        {% else %}
+            <a href="/login">Login</a>
+            <a href="/cadastro">Cadastrar</a>
+        {% endif %}
+        <a href="/">Home</a>
+    </div>
+</div>

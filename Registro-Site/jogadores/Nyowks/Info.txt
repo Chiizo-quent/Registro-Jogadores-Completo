@@ -1,0 +1,30 @@
+{
+  "usuario": "Nyowks",
+  "nome": "Queijo",
+  "descricao": "Owmegioamweoigmaoig",
+  "jogo_principal": "",
+  "avatar": "avatar.gif",
+  "fundo": "fundo.gif",
+  "atualizado": 1791410743,
+  "cor_moldura": "#000000",
+  "cor_destaque": "#4900b8",
+  "cor_fundo": "#0004ff",
+  "jogos": [
+    {
+      "nome": "Hollow Knight",
+      "info": "Marvelous Gamer.",
+      "foto": "jogo1.jpg"
+    },
+    {
+      "nome": "Não é um jogo.",
+      "info": "Só pra testar man.",
+      "foto": "jogo2.gif"
+    },
+    {
+      "nome": "",
+      "info": "",
+      "foto": ""
+    }
+  ],
+  "criado_em": "2026-10-07 18:27:47"
+}

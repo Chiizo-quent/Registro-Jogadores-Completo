@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ jogador.nome }} - Perfil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/perfil.css') }}">
+</head>
+<!-- as 3 cores escolhidas pela pessoa viram variáveis de CSS (--moldura, --destaque, --fundo) -->
+<body class="pagina-perfil" style="--moldura: {{ jogador.cor_moldura }}; --destaque: {{ jogador.cor_destaque }}; --fundo: {{ jogador.cor_fundo }};">
+
+    <!-- imagem/GIF de fundo (fica atrás de tudo) -->
+    <div class="fundo-perfil"
+         {% if jogador.fundo %}style="background-image: url('{{ url_for('midia', usuario=jogador.usuario, arquivo=jogador.fundo, v=jogador.atualizado) }}');"{% endif %}></div>
+
+    {% include "_menu.html" %}
+
+    <!-- Quadrado com a foto de perfil -->
+    <header class="capa">
+        <div class="avatar">
+            {% if jogador.avatar %}
+            <img src="{{ url_for('midia', usuario=jogador.usuario, arquivo=jogador.avatar, v=jogador.atualizado) }}" alt="Foto de {{ jogador.nome }}">
+            {% else %}{{ jogador.nome[0]|upper }}{% endif %}
+        </div>
+        <div class="titulo">
+            <h1>{{ jogador.nome }}</h1>
+            <p class="sub">{{ jogador.nome_aluno or "Aluno não informou o nome" }}</p>
+            <span class="selo">Jogador #{{ numero }}</span>
+            {% if eh_dono %}<a class="botao-editar" href="/meu-perfil">Editar perfil</a>{% endif %}
+        </div>
+    </header>
+
+    <main class="perfil">
+        <!-- Coluna da esquerda -->
+        <aside class="lateral">
+            <section class="painel">
+                <h2>Estatísticas</h2>
+                <div class="stats">
+                    <div class="stat"><strong>#{{ numero }}</strong><span>Ordem de registro</span></div>
+                    <div class="stat"><strong>{{ total }}</strong><span>Jogadores no site</span></div>
+                    <div class="stat"><strong>{{ jogos|length }}</strong><span>Jogos favoritos</span></div>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Coluna principal -->
+        <section class="principal">
+            <div class="painel">
+                <h2>Sobre</h2>
+                <p class="bio">{{ jogador.descricao or "Este jogador ainda não tem descrição." }}</p>
+            </div>
+
+            <div class="painel">
+                <h2>Jogos que eu gosto</h2>
+                {% if jogos %}
+                <div class="jogos">
+                    {% for jogo in jogos %}
+                    <div class="jogo-card">
+                        <div class="capa-jogo">
+                            {% if jogo.foto %}
+                            <img src="{{ url_for('midia', usuario=jogador.usuario, arquivo=jogo.foto, v=jogador.atualizado) }}" alt="{{ jogo.nome }}">
+                            {% else %}{{ jogo.nome[0]|upper }}{% endif %}
+                        </div>
+                        <p class="nome-jogo">{{ jogo.nome }}</p>
+                        {% if jogo.info %}<p class="info-jogo">{{ jogo.info }}</p>{% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="vazio">Nenhum jogo adicionado ainda.</p>
+                {% endif %}
+            </div>
+
+            <a class="voltar" href="/">&larr; Voltar para a lista</a>
+        </section>
+    </main>
+</body>
+</html>

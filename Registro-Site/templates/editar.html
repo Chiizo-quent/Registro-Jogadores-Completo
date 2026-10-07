@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if tem_perfil %}Editar perfil{% else %}Criar perfil{% endif %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/editar.css') }}">
+</head>
+<body>
+    {% include "_menu.html" %}
+
+    <!-- "macro" = função do HTML: evita repetir o mesmo bloco 5 vezes -->
+    {% macro campo_imagem(base, titulo, arquivo, dica) %}
+    <div class="campo-imagem">
+        <label>{{ titulo }}</label>
+        <img class="prev" id="prev-{{ base }}" alt=""
+             {% if arquivo %}src="{{ url_for('midia', usuario=usuario, arquivo=arquivo, v=perfil.atualizado) }}"{% else %}hidden{% endif %}>
+        <input type="file" name="{{ base }}" accept="image/png,image/jpeg,image/gif,image/webp" data-preview="prev-{{ base }}">
+        <small>{{ dica }}</small>
+        {% if arquivo %}<label class="remover"><input type="checkbox" name="remover_{{ base }}"> Remover imagem atual</label>{% endif %}
+    </div>
+    {% endmacro %}
+
+    <h1>{% if tem_perfil %}Editar perfil{% else %}Criar perfil{% endif %}</h1>
+
+    <form class="editor" action="/SalvarPerfil" method="POST" enctype="multipart/form-data">
+        {% if erro %}<p class="aviso">{{ erro }}</p>{% endif %}
+
+        <section class="painel">
+            <h2>Básico</h2>
+            <label>Nome de exibição</label>
+            <input type="text" name="nome" value="{{ perfil.nome }}" maxlength="30" required>
+            <label>Nome do Aluno</label>
+            <input type="text" name="nome_aluno" value="{{ perfil.nome_aluno }}" maxlength="40" placeholder="Ex.: Arthur Gonçalves">
+            <label>Sobre mim</label>
+            <textarea name="descricao" rows="4" maxlength="500" placeholder="Escreva sua bio aqui.">{{ perfil.descricao }}</textarea>
+        </section>
+
+        <section class="painel">
+            <h2>Personalização</h2>
+            {{ campo_imagem("avatar", "Foto de perfil", perfil.avatar, "PNG, JPG, GIF ou WEBP. Até 3 MB.") }}
+            <div class="cores">
+                <div><label>Cor da moldura</label><input type="color" name="cor_moldura" value="{{ perfil.cor_moldura }}"></div>
+                <div><label>Cor de destaque</label><input type="color" name="cor_destaque" value="{{ perfil.cor_destaque }}"></div>
+                <div><label>Cor do fundo</label><input type="color" name="cor_fundo" value="{{ perfil.cor_fundo }}"></div>
+            </div>
+            {{ campo_imagem("fundo", "Plano de fundo (gifs funcionam)", perfil.fundo, "Até 10 MB. Se não colocar uma image, a cor de fundo será usada.") }}
+        </section>
+
+        <section class="painel">
+            <h2>Jogos que eu gosto (máximo de 3)</h2>
+            <p class="dica">Deixe o nome vazio para apagar o jogo.</p>
+            {% for slot in perfil.jogos %}
+            <fieldset class="jogo-slot">
+                <legend>Jogo {{ loop.index }}</legend>
+                <input type="text" name="jogo{{ loop.index }}_nome" value="{{ slot.nome }}" maxlength="40" placeholder="Nome do jogo">
+                <input type="text" name="jogo{{ loop.index }}_info" value="{{ slot.info }}" maxlength="80" placeholder="Informação (ex.: 120h jogadas, nota 10/10)">
+                {{ campo_imagem("jogo" ~ loop.index, "Capa do jogo", slot.foto, "Imagem vertical funciona melhor. Até 3 MB.") }}
+            </fieldset>
+            {% endfor %}
+        </section>
+
+        <button type="submit" class="salvar">Salvar perfil</button>
+    </form>
+
+    <script src="{{ url_for('static', filename='script/editar.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Jogador</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/login.css') }}">
+</head>
+<body>
+    <div class="topo">
+    <div class="login-container">
+        <form action="/FazerJogador" method="POST">
+            <h1>Novo Jogador</h1>
+            <p>Logado como {{ usuario }}</p>
+            {% if erro %}<p class="aviso">{{ erro }}</p>{% endif %}
+            <input type="text" name="nome" placeholder="Nome do jogador" required>
+            <input type="text" name="jogo" placeholder="Jogo principal (opcional)" maxlength="40">
+            <input type="text" name="localizacao" placeholder="Localização (opcional)" maxlength="40">
+            <textarea name="descricao" rows="3" placeholder="Sobre o jogador" maxlength="500"></textarea>
+            <button type="submit">Registrar</button>
+            <p><a href="/">Voltar</a></p>
+        </form>
+    </div>
+    </div>
+</body>
+</html>

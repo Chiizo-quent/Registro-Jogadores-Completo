@@ -1,0 +1,196 @@
+/* As cores vêm das variáveis --moldura, --destaque e --fundo definidas no <body> do perfil.html */
+body.pagina-perfil {
+    background-color: var(--fundo);
+}
+
+/* imagem/GIF de fundo, fixa atrás de tudo */
+.fundo-perfil {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* ===== Faixa do topo (estilo Steam) ===== */
+.capa {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    padding: 30px 25px;
+    margin-bottom: 20px;
+    border: 1px solid var(--destaque);
+    border-radius: 4px;
+    background: linear-gradient(120deg, rgba(3, 4, 94, 0.85), var(--destaque));
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.capa .avatar {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 56px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #03045e;
+    border: 4px solid var(--moldura);               /* moldura que a pessoa escolhe */
+    box-shadow: 0 0 14px var(--moldura);
+    border-radius: 4px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+.capa .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.capa .titulo h1 {
+    margin-bottom: 5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    word-break: break-word;
+}
+.capa .sub {
+    color: #ffffff;
+    opacity: 0.85;
+    margin-bottom: 10px;
+}
+.capa .selo {
+    display: inline-block;
+    padding: 3px 10px;
+    font-size: 0.85rem;
+    color: #03045e;
+    background-color: var(--moldura);
+    border-radius: 3px;
+    font-weight: bold;
+}
+.botao-editar {
+    display: inline-block;
+    margin-left: 10px;
+    padding: 3px 10px;
+    font-size: 0.85rem;
+    color: #ffffff;
+    text-decoration: none;
+    border: 1px solid var(--moldura);
+    border-radius: 3px;
+}
+.botao-editar:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ===== Layout em duas colunas ===== */
+.perfil {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 20px;
+    align-items: start;
+}
+.lateral, .principal {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ===== Painéis (meio transparentes, para o fundo aparecer) ===== */
+.painel {
+    background-color: rgba(2, 30, 90, 0.85);
+    border: 1px solid var(--destaque);
+    border-radius: 4px;
+    padding: 0 0 15px 0;
+}
+.painel h2 {
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: var(--destaque);
+    padding: 8px 15px;
+    margin-bottom: 12px;
+    border-radius: 3px 3px 0 0;
+}
+.painel > *:not(h2) {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+/* caixinhas de estatística */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+.stat {
+    background-color: rgba(3, 4, 94, 0.8);
+    border: 1px solid var(--destaque);
+    border-radius: 4px;
+    text-align: center;
+    padding: 10px 4px;
+}
+.stat strong {
+    display: block;
+    font-size: 1.3rem;
+    color: #ffffff;
+}
+.stat span {
+    font-size: 0.7rem;
+    color: #90e0ef;
+}
+
+/* sobre */
+.bio {
+    color: #caf0f8;
+    line-height: 1.5;
+    white-space: pre-wrap;     /* respeita as quebras de linha */
+    word-break: break-word;
+}
+.vazio {
+    color: #90e0ef;
+}
+
+/* ===== Jogos que eu gosto (estilo Discord) ===== */
+.jogos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 14px;
+}
+.capa-jogo {
+    aspect-ratio: 3 / 4;                 /* formato retrato, como uma capa */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #03045e;
+    border: 2px solid var(--destaque);
+    border-radius: 8px;
+    overflow: hidden;
+}
+.capa-jogo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.nome-jogo {
+    margin-top: 6px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #ffffff;
+}
+.info-jogo {
+    font-size: 0.75rem;
+    color: #90e0ef;
+}
+
+.voltar {
+    color: #90e0ef;
+    text-decoration: none;
+}
+.voltar:hover {
+    text-decoration: underline;
+}
+
+/* celular: uma coluna só */
+@media (max-width: 760px) {
+    .perfil { grid-template-columns: 1fr; }
+    .capa { flex-direction: column; align-items: center; text-align: center; }
+}

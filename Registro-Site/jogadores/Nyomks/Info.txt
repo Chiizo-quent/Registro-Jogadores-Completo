@@ -1,0 +1,8 @@
+{
+  "nome": "Nyomks",
+  "descricao": "Sei la man",
+  "jogo": "",
+  "localizacao": "",
+  "registrado_por": "Nyowks",
+  "registrado_em": "2026-10-07 14:22"
+}
